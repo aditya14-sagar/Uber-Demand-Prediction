@@ -1,0 +1,33 @@
+schema: '2.0'
+stages:
+  daingestion:
+    cmd: python src/data/data_ingestion.py
+    deps:
+    - path: data/raw/yellow_tripdata_2016-01.csv
+      hash: md5
+      md5: dbbfeaf3e090c885588085f0f40acc38
+      size: 1708674492
+    - path: data/raw/yellow_tripdata_2016-02.csv
+      hash: md5
+      md5: b5403017ef15378aad4d477542065962
+      size: 1783554554
+    - path: data/raw/yellow_tripdata_2016-03.csv
+      hash: md5
+      md5: fbc95c81a17ef549e64881a456662460
+      size: 1914669757
+    - path: src/data/data_ingestion.py
+      hash: md5
+      md5: a240e6e118b209fc30a59f27be08efa4
+      size: 7140
+    outs:
+    - path: data/interim/df_without_outliers.csv
+      hash: md5
+      md5: dfd723e2f538f5475039d72d42c235d2
+      size: 1924079864
+  data_ingestion:
+    cmd: python ./src/data/data_ingestion.py
+    deps:
+    - path: ./src/data/data_ingestion.py
+      hash: md5
+      md5: a240e6e118b209fc30a59f27be08efa4
+      size: 7140
