@@ -89,3 +89,4 @@ target/
 .mypy_cache/
 myenv/
 models/
+/run_information.json

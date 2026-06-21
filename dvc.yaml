@@ -35,3 +35,14 @@ stages:
     outs:
       - ./models/encoder.joblib
       - ./models/model.joblib
+
+  model_evaluation:
+    cmd: python ./src/model/model_evaluation.py
+    deps:
+      - ./src/model/model_evaluation.py
+      - ./models/encoder.joblib
+      - ./models/model.joblib
+      - ./data/processed/test.csv
+      - ./data/processed/train.csv
+    outs:
+      - ./run_information.json
