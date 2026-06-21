@@ -89,4 +89,3 @@ target/
 .mypy_cache/
 myenv/
 models/
-/models
