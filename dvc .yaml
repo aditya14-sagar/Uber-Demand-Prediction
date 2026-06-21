@@ -17,3 +17,12 @@ stages:
       - ./data/processed/resampled_data.csv
       - ./models/scaler.joblib
       - ./models/mb_kmeans.joblib
+  
+  feature_processing:
+    cmd: python ./src/features/feature_processing.py
+    deps:
+      - ./src/features/feature_processing.py
+      - ./data/processed/resampled_data.csv
+    outs:
+      - ./data/processed/train.csv
+      - ./data/processed/test.csv
