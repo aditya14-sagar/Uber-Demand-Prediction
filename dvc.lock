@@ -36,8 +36,8 @@ stages:
     deps:
     - path: ./src/features/extract_features.py
       hash: md5
-      md5: acd3f7a32210526c6321ba591921a513
-      size: 11423
+      md5: 0c97a0dc717a47fb089ad1df0e71889c
+      size: 11461
     params:
       params.yaml:
         extract_features.ewma.alpha: 0.4
@@ -51,12 +51,12 @@ stages:
       size: 8480300
     - path: ./models/mb_kmeans.joblib
       hash: md5
-      md5: 36ba931239a932f36df05074b5948a90
-      size: 143771
+      md5: 35dd6efd5e8a2c9f7535b45e4c4d936a
+      size: 141179
     - path: ./models/scaler.joblib
       hash: md5
-      md5: 92d53b5c00c80b778270990310f09141
-      size: 919
+      md5: 7c193d8afb3041379e14f4a720e3a43c
+      size: 951
   feature_processing:
     cmd: python ./src/features/feature_processing.py
     deps:

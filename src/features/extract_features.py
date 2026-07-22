@@ -29,7 +29,7 @@ def read_cluster_input(data_path, chunksize=100000, usecols=["pickup_latitude", 
     if data_path.stat().st_size == 0:
         raise ValueError(f"Data file is empty: {data_path}")
     try:
-        df_reader = pd.read_csv(data_path, chunksize=chunksize, usecols=usecols)
+        df_reader = pd.read_csv(data_path, chunksize=chunksize, usecols=["pickup_latitude", "pickup_longitude"])
     except ValueError as e:
         raise ValueError(f"One or more expected columns {usecols} are missing from {data_path}: {e}") from e
     except Exception as e:
@@ -303,3 +303,5 @@ if __name__ == "__main__":
         logger.error("Failed to write output CSV to %s: %s", save_path, e)
         raise SystemExit(1)
     logger.info("Output saved to %s", save_path)
+
+
