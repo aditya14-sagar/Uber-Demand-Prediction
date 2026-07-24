@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 import logging
 from pathlib import Path
-from sklearn.linear_model import LinearRegression
+from xgboost import XGBRegressor
 from sklearn import set_config
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
@@ -23,6 +23,18 @@ logger.addHandler(handler)
 # make a formatter
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
+
+# Best hyperparameters from Optuna study (model: XGBR)
+BEST_PARAMS = {
+    "n_estimators": 450,
+    "learning_rate": 0.14436763603473178,
+    "max_depth": 10,
+    "subsample": 0.896026783990372,
+    "colsample_bytree": 0.991222460111412,
+    "reg_alpha": 7.346721322483371e-08,
+    "reg_lambda": 0.1343831593157791,
+    "min_child_weight": 9,
+}
 
 
 def load_data(data_path: Path) -> pd.DataFrame:
@@ -99,8 +111,8 @@ def fit_transform_encoder(
     return X_train_encoded
 
 
-def train_model(X_train_encoded: pd.DataFrame, y_train: pd.Series) -> LinearRegression:
-    """Fit a LinearRegression model."""
+def train_model(X_train_encoded: pd.DataFrame, y_train: pd.Series) -> XGBRegressor:
+   
     if len(X_train_encoded) != len(y_train):
         logger.error(
             "Row count mismatch: X has %d rows, y has %d rows",
@@ -112,15 +124,19 @@ def train_model(X_train_encoded: pd.DataFrame, y_train: pd.Series) -> LinearRegr
         logger.error("Encoded features contain NaN values after transform")
         raise ValueError("NaNs present in encoded training features")
 
-    lr = LinearRegression()
+    model = XGBRegressor(
+        **BEST_PARAMS,
+        random_state=42,
+        n_jobs=-1,
+    )
     try:
-        lr.fit(X_train_encoded, y_train)
+        model.fit(X_train_encoded, y_train)
     except ValueError as e:
         logger.error("Model fitting failed: %s", e)
         raise
 
     logger.info("Model trained successfully")
-    return lr
+    return model
 
 
 def save_artifact(obj, save_path: Path, label: str) -> None:
@@ -155,10 +171,10 @@ def main() -> None:
     encoder_save_path = root_path / "models/encoder.joblib"
     save_artifact(encoder, encoder_save_path, "Encoder")
 
-    lr = train_model(X_train_encoded, y_train)
+    model = train_model(X_train_encoded, y_train)
 
     model_save_path = root_path / "models/model.joblib"
-    save_artifact(lr, model_save_path, "Model")
+    save_artifact(model, model_save_path, "Model")
 
 
 if __name__ == "__main__":

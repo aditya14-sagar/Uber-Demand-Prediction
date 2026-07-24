@@ -86,17 +86,17 @@ stages:
       size: 9609299
     - path: ./src/model/model_building.py
       hash: md5
-      md5: e72deba6aeb1348769615569b9db3c1b
-      size: 5869
+      md5: 490f93cbfa7c848f1979d6cd4b177ea4
+      size: 6257
     outs:
     - path: ./models/encoder.joblib
       hash: md5
-      md5: 42e72b31c72e7d2a34e1b9d040f761e6
-      size: 3207
+      md5: 5fc3ececa6215a53fa98a0982f4fe30b
+      size: 3316
     - path: ./models/model.joblib
       hash: md5
-      md5: 8e483ba6c12eaffa4b1151006534826c
-      size: 2169
+      md5: 620e7c68532488cd899abb2c0a4990fc
+      size: 7229025
   model_evaluation:
     cmd: python ./src/model/model_evaluation.py
     deps:
@@ -110,12 +110,12 @@ stages:
       size: 9609299
     - path: ./models/encoder.joblib
       hash: md5
-      md5: 42e72b31c72e7d2a34e1b9d040f761e6
-      size: 3207
+      md5: 5fc3ececa6215a53fa98a0982f4fe30b
+      size: 3316
     - path: ./models/model.joblib
       hash: md5
-      md5: 8e483ba6c12eaffa4b1151006534826c
-      size: 2169
+      md5: 620e7c68532488cd899abb2c0a4990fc
+      size: 7229025
     - path: ./src/model/model_evaluation.py
       hash: md5
       md5: d37cb34acf6470ffbc425ac204c10cee
@@ -123,15 +123,15 @@ stages:
     outs:
     - path: ./run_information.json
       hash: md5
-      md5: 1238cd99335d9e70687034eccf4b0449
-      size: 246
+      md5: 6000c148d526fa21470d1a50ba75dbda
+      size: 175
   register_model:
     cmd: python ./src/model/register_model.py
     deps:
     - path: ./run_information.json
       hash: md5
-      md5: 1238cd99335d9e70687034eccf4b0449
-      size: 246
+      md5: 6000c148d526fa21470d1a50ba75dbda
+      size: 175
     - path: ./src/model/register_model.py
       hash: md5
       md5: e7768aac7451a571bb1dbed0be2bf145
