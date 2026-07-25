@@ -1,0 +1,33 @@
+# version control
+.git
+.dvc/cache
+.dvc/tmp
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+myenv/
+venv/
+.venv/
+
+# notebooks / dev artifacts
+notebooks/
+*.ipynb
+*.ipynb_checkpoints
+
+# data not needed in the image (only plot_data.csv and test.csv are COPY'd explicitly)
+data/raw/
+data/interim/
+data/processed/train.csv
+
+# ci/cd and unrelated requirements files
+requirements.txt
+requirements-dev.txt
+.github/
+
+# misc
+*.log
+run_information.json
+README.md
