@@ -66,9 +66,7 @@ def assign_region(lat: float, long: float) -> int:
     raw = pd.DataFrame({"pickup_latitude": [lat], "pickup_longitude": [long]})
     raw = raw[scaler.feature_names_in_]
     scaled = scaler.transform(raw)
-    # kmeans was fit without feature names, so a DataFrame input triggers a
-    # sklearn "X has feature names" warning; cast both input and output to
-    # numpy to sidestep the pandas-output config set at the top of the file
+    
     prediction = np.asarray(kmeans.predict(np.asarray(scaled)))
     return int(prediction.ravel()[0])
 
@@ -170,7 +168,8 @@ if date and time:
         if map_type == "Complete NYC Map":
             plot_df = df_plot
             input_data = df.loc[index, :].sort_values("region")
-            region_ids = list(range(30))
+            
+            region_ids = input_data["region"].tolist()
         else:
             scaled_cord = scaler.transform(sample_loc[scaler.feature_names_in_])
             distances = np.asarray(kmeans.transform(np.asarray(scaled_cord))).ravel().tolist()
@@ -184,7 +183,7 @@ if date and time:
         predictions = pipe.predict(input_data.drop(columns=["total_pickups"]))
         results_df = pd.DataFrame({
             "region": region_ids,
-            "predicted_demand": predictions[: len(region_ids)].astype(int),
+            "predicted_demand": predictions.astype(int),
             "color": [region_colors[r] for r in region_ids],
         })
         results_df["is_current_region"] = results_df["region"] == region
@@ -229,15 +228,7 @@ if date and time:
             chart_df = results_df.copy()
             chart_df = chart_df.sort_values("region")
 
-            # explicitly lock the x-axis category order — without this,
-            # coloring by is_current_region splits the bars into separate
-            # traces and Plotly re-interleaves them, silently undoing the
-            # sort above. Note: category_orders={"x": ...} does NOT work
-            # here because passing a Series (not a column name) as x makes
-            # Plotly Express internally name the column after the Series'
-            # own .name ("region"), not "x" — so we set it on the figure
-            # layout directly instead, which always works regardless of
-            # Express's internal column naming.
+            
             category_order = chart_df["region"].astype(str).tolist()
 
             fig = px.bar(
@@ -276,4 +267,3 @@ if date and time:
                 file_name=f"demand_predictions_{index.strftime('%Y%m%d_%H%M')}.csv",
                 mime="text/csv",
             )
-
