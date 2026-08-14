@@ -2,12 +2,6 @@
 
 > End-to-end MLOps project that forecasts Uber ride demand across New York City for upcoming time intervals, using a fully versioned and automated data → model → deployment pipeline.
 
-[![CI/CD](https://github.com/aditya14-sagar/Uber-Demand-Prediction/actions/workflows/ci.yaml/badge.svg)](https://github.com/aditya14-sagar/Uber-Demand-Prediction/actions)
-[![DVC](https://img.shields.io/badge/data-DVC%20versioned-945DD6?logo=dvc)](https://dvc.org/)
-[![MLflow](https://img.shields.io/badge/tracking-MLflow-0194E2?logo=mlflow)](https://mlflow.org/)
-[![Python](https://img.shields.io/badge/python-3.10%2B-blue?logo=python)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-see%20LICENSE-lightgrey)](./LICENSE)
-
 ---
 
 ## 📸 Screenshots
