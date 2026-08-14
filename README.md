@@ -328,12 +328,4 @@ Run `dvc pull` first (or `dvc repro`) so `models/*.joblib` files are present loc
 
 ---
 
-## 16. License & Contact
-
-- **License:** See the [`LICENSE`](https://github.com/aditya14-sagar/Uber-Demand-Prediction/blob/main/LICENSE) file in the repository. *(Note: at the time of writing, this file is present but empty — add your chosen license text, e.g. MIT, before publishing/distributing the project.)*
-- **Repository:** [github.com/aditya14-sagar/Uber-Demand-Prediction](https://github.com/aditya14-sagar/Uber-Demand-Prediction)
-- **Maintainer:** [aditya14-sagar](https://github.com/aditya14-sagar)
-
----
-
 Project scaffolding based on the [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/) template. `#cookiecutterdatascience`
